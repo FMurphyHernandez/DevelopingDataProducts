@@ -1,0 +1,50 @@
+Twitter Word Cloud
+========================================================
+author: Frank Murphy-Hernandez
+date:`r date()`
+
+
+
+Twitter
+========================================================
+
+There is a libarary for R called TwitteR.
+
+Twitter uses RCurl to connect R to the twitter API.
+
+We call the 200 more recent tweets with a given hashtag.
+
+With those tweets we make a wordcloud.
+
+The bigger the word, the more it appears in the tweets.
+
+Also, the colors change with the frequency.
+
+
+How we do? TwitteR
+========================================================
+
+```{r, cache=TRUE}
+library("twitteR")
+load(file="twitter authentication.Rdata")
+registerTwitterOAuth(cred)
+Twts<- searchTwitter(paste('#',"MileyCyrus",sep=''), n=200, cainfo="cacert.pem")
+Twts_txt<- sapply(Twts, function(x) x$getText())
+length(Twts)
+```
+
+The fist tweets
+========================================================
+
+```{r,echo=FALSE}
+Twts_txt[1:5]
+```
+
+The Result
+========================================================
+
+```{r,cache=TRUE}
+source('Nuage.R')
+Cloud('MileyCyrus')
+```
+
